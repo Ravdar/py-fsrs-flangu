@@ -105,7 +105,9 @@ class FSRS:
 
             s.again.due = now + timedelta(minutes=1)
             s.hard.due = now + timedelta(minutes=5)
-            s.good.due = now + timedelta(minutes=10)
+            good_interval = self.next_interval(s.good.stability)
+            s.good.scheduled_days = good_interval
+            s.good.due = now + timedelta(days=good_interval)
             easy_interval = self.next_interval(s.easy.stability)
             s.easy.scheduled_days = easy_interval
             s.easy.due = now + timedelta(days=easy_interval)
